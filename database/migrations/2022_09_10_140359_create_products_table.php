@@ -15,21 +15,27 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('category_id')->constrained('catagories');
+            $table->foreignId('section_id')->constrained('sections');
+            $table->string('product_name');
+            $table->string('product_code')->unique();
+            $table->string('product_color')->nullable();
             $table->string('slug')->unique();
-            $table->string('short_description')->nullable();
-            $table->string('description');
+            $table->longText('description')->nullable();
             $table->decimal('regular_price');
-            $table->decimal('sale_price')->nullable();
-            $table->string('SKU');
+            $table->decimal('sale_price');
+            $table->float('product_discount')->nullable();
             $table->enum('stok_status',['instock','outofstock']);
-            $table->boolean('featured')->default(false);
-            $table->unsignedInteger('quantity')->default(10);
-            $table->string('image')->nullable();
-            $table->text('images')->nullable();
-            $table->bigInteger('catagory_id')->unsigned()->nullable();
+            $table->unsignedInteger('quantity')->default(1);
+            $table->string('meta_title')->nullable();
+            $table->string('meta_keyword')->nullable();
+            $table->string('meta_description')->nullable();
+            $table->string('product_image')->nullable();
+            $table->integer('added_by');
+            $table->tinyInteger('is_featured')->default('0');
+            $table->tinyInteger('status')->default('0');
             $table->timestamps();
-            $table->foreign('catagory_id')->references('id')->on('catagories')->onDelete('cascade');
+            
 
         });
     }

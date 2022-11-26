@@ -22,14 +22,14 @@ class ProductFactory extends Factory
         return [
             'name'=>$product_name,
             'slug'=>$slug,
-            'short_description'=>$this->faker->text(100),
+            'meta_description'=>$this->faker->text(100),
             'description'=>$this->faker->text(200),
             'regular_price'=>$this->faker->numberBetween(10,500),
             'SKU'=>'DIGI'.$this->faker->unique()->numberBetween(100,500),
             'stok_status'=>'instock',
             'quantity'=>$this->faker->numberBetween(100,200),
             'image'=>'digital_'.$this->faker->unique()->numberBetween(1,22).'.jpg',
-            'catagory_id'=>$this->faker->numberBetween(1,5),
+            'category_id'=>$this->faker->numberBetween(1,5),
             
         ];
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Catagory;
+use App\Models\Section;
 use Livewire\Component;
 
 class HeaderSearchComponent extends Component
@@ -16,8 +16,8 @@ class HeaderSearchComponent extends Component
         $this->fill(request()->only('search','product_cat','product_cat_id'));
     }
     public function render()
-    {
-        $catagories = Catagory::all();
-        return view('livewire.header-search-component',['catagories' => $catagories]);
+    { 
+        $categories = Section::with('categories')->get();
+        return view('livewire.header-search-component',['categories' => $categories]);
     }
 }

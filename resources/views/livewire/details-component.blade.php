@@ -1,13 +1,17 @@
+@section('title',$product->product_name.' | creator-shop')
 <main id="main" class="main-site">
 
 		<div class="container">
 
 			<div class="wrap-breadcrumb">
 				<ul>
-					<li class="item-link"><a href="/" class="link">home</a></li>
-					<li class="item-link"><span>detail</span></li>
+					<li class="item-link"><a href="{{url('shop')}}">home</a></li>
+					<li class="item-link"><a href="{{url('category/'.$product->section->name.'/all')}}">{{$product->section->name}}</a></li>
+					<li class="item-link"><a href="{{url('category/'.$product->section->name.'/'.$product->catagory->slug)}}">{{$product->catagory->slug}}</a></li>
+					<li class="item-link"><span>{{$product->product_name}}</span></li>
 				</ul>
 			</div>
+			
 			<div class="row">
 
 				<div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
@@ -16,31 +20,26 @@
 							<div class="product-gallery">
 							  <ul class="slides">
 
-							    <li data-thumb="{{asset('assets/images/products')}}/{{$product->image}}">
-							    	<img src="{{asset('assets/images/products')}}/{{$product->image}}" alt="product thumbnail" />
+						<li data-thumb="{{ asset('storage/'. $product->product_image ) }}">
+							<img src="{{ asset('storage/'. $product->product_image ) }}" alt="">
+						</li>
+							    @foreach($images as $image)
+								<li data-thumb="{{ asset('storage/'. $image->image ) }}">
+									<img src="{{ asset('storage/'. $image->image ) }}" alt="product thumbnail" />
 							    </li>
 
-							    
+								@endforeach
 
 							  </ul>
 							</div>
 						</div>
 						<div class="detail-info">
-							<div class="product-rating">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <a href="#" class="count-review">(05 review)</a>
-                            </div>
-                            <h2 class="product-name">{{$product->name}}</h2>
+							
+                            <h2 class="product-name">{{$product->product_name}}</h2>
                             <div class="short-desc">
-                            {{$product->short_description}}
+                            {{$product->meta_description}}
                             </div>
-                            <div class="wrap-social">
-                            	<a class="link-socail" href="#"><img src="{{asset('assets/images/social-list.png')}}" alt=""></a>
-                            </div>
+                           
 							@if($product->sale_price > 0)
                              
                             <div class="wrap-price">
@@ -48,7 +47,7 @@
 								<span class="product-price">${{$product->sale_price}}</span>
 							</div>
 							@else
-                            <div class="wrap-price"><span class="product-price">${{$product->regular_price}}</span></div>
+                            <div class="wrap-price"><span class="product-price">${{$product->sale_price}}</span></div>
 							@endif
                             <div class="stock-info in-stock">
                                 <p class="availability">Availability: <b>{{$product->stok_status}}</b></p>
@@ -63,10 +62,18 @@
 								</div>
 							</div>
 							<div class="wrap-butons">
-								<a href="#" class="btn add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add to Cart</a>
+								<a href="#" class="btn add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->product_name}}',{{$product->regular_price}})">Add to Cart</a>
                                 <div class="wrap-btn">
                                     <a href="#" class="btn btn-compare">Add Compare</a>
-                                    <a href="#" class="btn btn-wishlist">Add Wishlist</a>
+									@php
+									$witem = Cart::instance('wishlist')->content()->pluck('id');
+									@endphp
+									@if($witem->contains($product->id))
+									<a href="#" class="btn btn-wishlist"><span wire:click.prevent="removeFromWishlist({{$product->id}})">remove Wishlist</span></a>
+								  @else
+								   <a href="#" class="btn btn-wishlist"> <span wire:click.prevent="addToWishlist({{$product->id}},'{{$product->product_name}}',{{$product->regular_price}})">Add Wishlist</span></a>
+								  @endif
+                                    
                                 </div>
 							</div>
 						</div>
@@ -225,12 +232,12 @@
 								<li class="product-item">
 									<div class="product product-widget-style">
 										<div class="thumbnnail">
-											<a href="{{route('product.details',['slug'=>$popular_product->slug])}}" title="{{$popular_product->name}}">
-												<figure><img src="{{asset('assets/images/products')}}/{{$popular_product->image}}" alt="{{$popular_product->name}}"></figure>
+											<a href="{{route('product.details',['slug'=>$popular_product->slug])}}" title="{{$popular_product->product_name}}">
+												<figure><img src="{{ asset('storage/'. $popular_product->product_image ) }}" alt="{{$popular_product->product_name}}"></figure>
 											</a>
 										</div>
 										<div class="product-info">
-											<a href="{{route('product.details',['slug'=>$popular_product->slug])}}" title="{{$popular_product->name}}" class="product-name"><span>{{$popular_product->name}}</span></a>
+											<a href="{{route('product.details',['slug'=>$popular_product->slug])}}" title="{{$popular_product->product_name}}" class="product-name"><span>{{$popular_product->product_name}}</span></a>
 											<div class="wrap-price"><span class="product-price">${{$popular_product->regular_price}}</span></div>
 										</div>
 									</div>
@@ -251,8 +258,8 @@
                                @foreach($related_products as $related_product)                             
 								<div class="product product-style-2 equal-elem ">
 									<div class="product-thumnail">
-										<a href="{{route('product.details',['slug'=>$related_product->slug])}}" title="{{$related_product->name}}">
-											<figure><img src="{{asset('assets/images/products')}}/{{$related_product->image}}" width="214" height="214" alt="{{$related_product->name}}"></figure>
+										<a href="{{route('product.details',['slug'=>$related_product->slug])}}" title="{{$related_product->product_name}}">
+											<figure><img src="{{ asset('storage/'. $related_product->product_image ) }}" width="214" height="214" alt="{{$related_product->product_name}}"></figure>
 										</a>
 										<div class="group-flash">
 											<span class="flash-item new-label">new</span>
@@ -262,7 +269,7 @@
 										</div>
 									</div>
 									<div class="product-info">
-										<a href="{{route('product.details',['slug'=>$related_product->slug])}}" class="product-name"><span>{{$related_product->name}}</span></a>
+										<a href="{{route('product.details',['slug'=>$related_product->slug])}}" class="product-name"><span>{{$related_product->product_name}}</span></a>
 										<div class="wrap-price"><span class="product-price">${{$related_product->regular_price}}</span></div>
 									</div>
 								</div>

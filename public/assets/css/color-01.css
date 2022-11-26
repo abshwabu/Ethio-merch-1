@@ -98,7 +98,7 @@
 	border-color: 
 #07852e;
 }
-.widget.widget-tag-clouds ul li a:hover,
+/* .widget.widget-tag-clouds ul li a:hover,
 .product-list-style .advance-info .add-to-cart:hover,
 .product-style-3 a.add-to-cart:hover,
 .widget.filter-widget .inline-round li a:hover,
@@ -109,7 +109,7 @@
 .wrap-articles article .info a.btn-to-post:hover,
 .wrap-footer-content .wrap-function-info .fc-info-item{
 	border-color: #ff3c45 !important;
-}
+} */
 .wrap-footer-content .wrap-function-info .fc-info-item .wrap-left-info .fc-desc{
 	color: #ffc2c4 !important;
 }

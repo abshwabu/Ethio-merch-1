@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 use Cart;
 
 use App\Models\Product;
+use App\Models\Section;
 use App\Models\Catagory;
 use Livewire\Component;
 use Livewire\withPagination;
@@ -46,21 +47,22 @@ class ShopeComponent extends Component
     {
         if($this->sorting == 'date')
         {
-            $products = Product::orderBy('created_at','DESC')->paginate($this->pagesize);
+            $products = Product::where('status',1)->orderBy('created_at','DESC')->paginate($this->pagesize);
         }
         else if($this->sorting == 'price')
         {
-            $products = Product::orderBy('regular_price','ASC')->paginate($this->pagesize);
+            $products = Product::where('status',1)->orderBy('regular_price','ASC')->paginate($this->pagesize);
         }
         else if($this->sorting == 'price-desc')
         {
-            $products = Product::orderBy('regular_price','DESC')->paginate($this->pagesize);
+            $products = Product::where('status',1)->orderBy('regular_price','DESC')->paginate($this->pagesize);
         }
         else 
-        {
-            $products = Product::paginate($this->pagesize);
+        { 
+            $products = Product::where('status',1)->paginate($this->pagesize);
         }
-        $catagories = Catagory::all();
-        return view('livewire.shope-component',['products'=>$products, 'catagories'=>$catagories])->layout('layouts.home');
+        $categories = Section::with('categories')->get();
+        $popular = Product::where('is_featured',1)->get();
+        return view('livewire.shope-component',['products'=>$products, 'categories'=>$categories , 'popular'=>$popular])->layout('layouts.home');
     }
 }

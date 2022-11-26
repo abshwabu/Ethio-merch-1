@@ -15,13 +15,11 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('order_id')->unsigned();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->enum('mode',['cod','card','telebirr'])->default('cod');
             $table->enum('status',['pending','approved','declined','refunded'])->default('pending');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

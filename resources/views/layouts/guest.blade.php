@@ -50,7 +50,7 @@
 								
 								@if(Route::has('login'))
 								@auth
-								 @if(Auth::user()->utype === 'ADM')
+								 @if(Auth::user()->role === 'ADM')
 									<li class="menu-item menu-item-has-children parent" >
 										<a title="My Account" href="#">My Account({{Auth::user()->name}})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 										<ul class="submenu curency" >
@@ -145,7 +145,7 @@
 					<div class="header-nav-section">
 						<div class="container">
 							<ul class="nav menu-nav clone-main-menu" id="mercado_haead_menu" data-menuname="Sale Info" >
-								<li class="menu-item"><a href="#" class="link-term">Weekly Featured</a><span class="nav-label hot-label">hot</span></li>
+								<li class="menu-item"><a href="#" class="link-term">Weekly is_featured</a><span class="nav-label hot-label">hot</span></li>
 								<li class="menu-item"><a href="#" class="link-term">Hot Sale items</a><span class="nav-label hot-label">hot</span></li>
 								<li class="menu-item"><a href="#" class="link-term">Top new items</a><span class="nav-label hot-label">hot</span></li>
 								<li class="menu-item"><a href="#" class="link-term">Top Selling</a><span class="nav-label hot-label">hot</span></li>

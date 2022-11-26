@@ -1,4 +1,4 @@
-
+@section('title','Shopping cart')
 
 <main id="main" class="main-site">
 
@@ -6,35 +6,31 @@
 
         <div class="wrap-breadcrumb">
             <ul>
-                <li class="item-link"><a href="/" class="link">home</a></li>
-                <li class="item-link"><span>Cart</span></li>
+                <li class="item-link"><a href="{{url('shop')}}" class="link">home</a></li>
+                <li class="item-link"><span>shopping cart</span></li>
             </ul>
         </div>
         <div class=" main-content-area">
         @if(Cart::instance('cart')->count() > 0)
 
             <div class="wrap-iten-in-cart">
-                @if(Session::has('success_message'))
-                    <div class="alert alert-success">
-                        <strong>Success</strong> {{Session::get('success_message')}}
-                    </div>
-                @endif
+                
                 <h3 class="box-title">Products Name</h3>
                 <ul class="products-cart">
                     @foreach (Cart::instance('cart')->content() as $item)
                     <li class="pr-cart-item">
                         <div class="product-image">
-                            <figure><img src="{{ ('assets/images/products') }}/{{$item->model->image}}" alt="{{$item->model->name}}"></figure>
+                            <figure><img src="{{ asset('storage/'. $item->model->product_image ) }}" alt="{{$item->model->product_name}}"></figure>
                         </div>
                         <div class="product-name">
-                            <a class="link-to-product" href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->model->name}}</a>
+                            <a class="link-to-product" href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->model->product_name}}</a>
                         </div>
-                        <div class="price-field produtc-price"><p class="price">${{$item->model->regular_price}}</p></div>
+                        <div class="price-field produtc-price"><p class="price">${{$item->model->sale_price}}</p></div>
                         <div class="quantity">
                             <div class="quantity-input">
                                 <input type="text" name="product-quatity" value="{{$item->qty}}" data-max="120" pattern="[0-9]*" >									
-                                <a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity('{{$item->rowId}}')"></a>
                                 <a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"></a>
+                                <a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity('{{$item->rowId}}')"></a>
                             </div>
                         </div>
                         <div class="price-field sub-total"><p class="price">${{$item->subtotal}}</p></div>

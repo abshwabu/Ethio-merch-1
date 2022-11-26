@@ -1,22 +1,45 @@
-<main id="main" class="main-site left-sidebar">
+@section('title','search-result')
 
+<main id="main" class="main-site left-sidebar">
+  <style>
+    .product-wish {
+      position: absolute;
+      top: 10%;
+      left: 0;
+      z-index: 99;
+      right: 30px;
+      text-align: right;
+      padding-top: 0;
+    }
+
+    .product-wish .fa {
+      color: #cbcbcb;
+      font-size: 32px;
+
+    }
+
+    .product-wish .fa:hover {
+      color: #ff7007;
+
+    }
+
+    .fill-heart {
+      color: #ff7007 !important;
+    }
+  </style>
 <div class="container">
 
   <div class="wrap-breadcrumb">
     <ul>
-      <li class="item-link"><a href="/" class="link">home</a></li>
-      <li class="item-link"><span>Digital & Electronics</span></li>
+      <li class="item-link"><a href="{{'shop'}}" class="link">home</a></li>
+      <li class="item-link"><span>Search result</span></li>
     </ul>
   </div>
   <div class="row">
 
     <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
 
-      <div class="banner-shop">
-        <a href="#" class="banner-link">
-          <figure><img src="{{asset('assets/images/shop-banner.jpg')}}" alt=""></figure>
-        </a>
-      </div>
+     
 
       <div class="wrap-shop-control">
 
@@ -57,27 +80,63 @@
       @if($products->count() > 0)
       <div class="row">
 
-        <ul class="product-list grid-products equal-container">
+        {{-- <ul class="product-list grid-products equal-container">
           @foreach($products as $product)
           <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
             <div class="product product-style-3 equal-elem ">
               <div class="product-thumnail">
-                <a href="{{route('product.details',['slug'=>$product->slug])}}" title="{{$product->name}}">
-                  <figure><img src="{{asset('assets/images/products')}}/{{$product->image}}" alt="{{$product->name}}"></figure>
+                <a href="{{route('product.details',['slug'=>$product->slug])}}" title="{{$product->product_name}}">
+                  <figure><img src="{{asset('assets/images/products')}}/{{$product->product_image}}" alt="{{$product->product_name}}"></figure>
                 </a>
               </div>
               <div class="product-info">
-                <a href="{{route('product.details',['slug'=>$product->slug])}}" class="product-name"><span>{{$product->name}}</span></a>
+                <a href="{{route('product.details',['slug'=>$product->slug])}}" class="product-name"><span>{{$product->product_name}}</span></a>
                 <div class="wrap-price"><span class="product-price">${{$product->regular_price}}</span></div>
-                <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add To Cart</a>
+                <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->product_name}}',{{$product->regular_price}})">Add To Cart</a>
               </div>
             </div>
           </li>
           @endforeach
        
 
-        </ul>
+        </ul> --}}
+        <ul class="product-list grid-products equal-container">
+          @php
+          $witem = Cart::instance('wishlist')->content()->pluck('id');
+          @endphp
+          @foreach($products as $product)
+          <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+            <div class="product product-style-3 equal-elem ">
+              <div class="product-thumnail">
+                <a href="{{route('product.details',['slug'=>$product->slug])}}" title="{{$product->product_name}}">
+                  <figure><img src="{{ asset('storage/'. $product->product_image ) }}"
+                      alt="{{$product->product_name}}" style="height: 200px"></figure>
+                </a>
+              </div>
+              <div class="product-info">
+                <a href="{{route('product.details',['slug'=>$product->slug])}}"
+                  class="product-name"><span>{{$product->product_name}}</span></a>
+                <div class="wrap-price"><span class="product-price">${{$product->sale_price}}</span></div>
+                <a href="#" class="btn add-to-cart"
+                  wire:click.prevent="store({{$product->id}},'{{$product->product_name}}',{{$product->sale_price}})">Add
+                  To Cart</a>
+                <div class="product-wish">
+                  @if($witem->contains($product->id))
+                  <a href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i
+                      class="fa fa-heart fill-heart"></i></a>
+                  @else
+                  <a href="#"><i class="fa fa-heart"
+                      wire:click.prevent="addToWishlist({{$product->id}},'{{$product->product_name}}',{{$product->sale_price}})"></i></a>
+                  @endif
+                </div>
+              </div>
+            </div>
+          </li>
+          @endforeach
 
+
+
+        </ul>
       </div>
       @else
         <p>Item not found</p>
@@ -101,7 +160,7 @@
           <ul class="list-category">
             @foreach ($catagories as $catagory)
             <li class="category-item">
-              <a href="{{route('product.catagory',['catagory_slug'=>$catagory->slug])}}" class="cate-link">{{$catagory->name}}</a>
+              <a href="{{url('category/'.$catagory->section->name.'/'.$catagory->slug)}}" class="cate-link">{{$catagory->name}}</a>
             </li>
             @endforeach
           </ul>

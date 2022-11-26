@@ -14,16 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('role');
             $table->string('password');
+            $table->string('profile_picture')->nullable();
+            $table->integer('status')->default('0');
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
-            $table->string('utype')->default('USR')->comment('ADM for admins USR for users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

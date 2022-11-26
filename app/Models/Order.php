@@ -13,12 +13,12 @@ class Order extends Model
 
     public function user()
     {
-       return $this->belongsTo(User::class);
+       return $this->belongsTo(User::class,'user_id' ?? 'session_id');
     }
 
     public function orderItems()
     {
-        $this->hasMany(OrderItem::class);
+       return $this->hasMany(OrderItem::class);
     }
     
     public function shipping()
