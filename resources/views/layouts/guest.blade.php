@@ -40,7 +40,7 @@
 						<div class="topbar-menu left-menu">
 							<ul>
 								<li class="menu-item" >
-									<a title="Hotline: (+123) 456 789" href="#" ><span class="icon label-before fa fa-mobile"></span>Hotline: (+123) 456 789</a>
+									<a title="support@yenesuq.com" href="mailto:support@yenesuq.com" ><span class="icon label-before fa fa-mobile"></span>Hotline: (+123) 456 789</a>
 								</li>
 							</ul>
 						</div>
