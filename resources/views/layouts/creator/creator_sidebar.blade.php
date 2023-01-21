@@ -1,24 +1,15 @@
-<aside class="main-sidebar bg-info elevation-4 fixed-sidebar text-white">
+<aside class="main-sidebar elevation-4 fixed-sidebar text-white" style="background: #efa666">
   <!-- Brand Logo -->
   <a href="index3.html" class="brand-link">
 
 
-    <img src="{{ asset('assets/images/admin_imgs/t-shirtLogo.png') }}" alt="EthioMerch Logo"
-      class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">Ethio Merch</span>
+    <img src="{{ asset('assets/images/admin_imgs/t-shirtLogo.png') }}" alt="EthioMerch Logo" class="">
+    <span class="brand-text font-weight-light"></span>
   </a>
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="{{ asset('assets/images/admin_imgs/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
-      </div>
-      <div class="info">
-        <a href="#" class="d-block text-white">{{ Auth::user()->name }}</a>
-      </div>
-    </div>
+
 
     <!-- SidebarSearch Form -->
     <div class="form-inline">
@@ -38,7 +29,8 @@
         <!-- Add icons to the links using the .nav-icon text-white class
                with font-awesome or any other icon font library -->
         <li class="nav-item ">
-          <a href="{{ url('creator/dashboard') }}" class="nav-link {{ Request::is('creator/dashboard') ? 'active' : '' }}">
+          <a href="{{ url('creator/dashboard') }}"
+            class="nav-link {{ Request::is('creator/dashboard') ? 'active' : '' }}">
             <i class="nav-icon text-white fas fa-tachometer-alt"></i>
             <p class="text-white">
               Dashboard
@@ -47,24 +39,60 @@
 
         </li>
         <li class="nav-item">
-          <a href="{{ url('creator/templates') }}" class="nav-link {{ Request::is('creator/templates') ? 'active' : '' }}">
+          <a href="{{ url('creator/templates') }}"
+            class="nav-link {{ Request::is('creator/templates') ? 'active' : '' }}">
             <i class="nav-icon text-white fas fa-tshirt"></i>
             <p class="text-white">
               Templates
-              
+
             </p>
           </a>
-          
+
+        </li>
+        <li class="nav-item menu-open">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-copy text-white"></i>
+            <p class="text-white">
+              Catalogues
+              <i class="fas fa-angle-left right text-white"></i>
+              {{-- <span class="badge badge-info right">6</span> --}}
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ url('creator/section') }}"
+                class="nav-link {{ Request::is('creator/section') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon text-white"></i>
+                <p class="text-white">Sections</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('creator/categories') }}"
+                class="nav-link {{ Request::is('creator/categories') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon text-white"></i>
+                <p class="text-white">Categories</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('creator/products') }}"
+                class="nav-link {{ Request::is('creator/products') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon text-white"></i>
+                <p class="text-white">Products</p>
+              </a>
+            </li>
+
+          </ul>
         </li>
         <li class="nav-item">
-          <a href="{{ url('creator/statistics') }}" class="nav-link {{ Request::is('creator/statistics') ? 'active' : '' }}">
+          <a href="{{ url('creator/statistics') }}"
+            class="nav-link {{ Request::is('creator/statistics') ? 'active' : '' }}">
             <i class="nav-icon text-white ion ion-stats-bars"></i>
             <p class="text-white">
               Statistics
-              
+
             </p>
           </a>
-          
+
         </li>
         <li class="nav-item">
           <a href="{{ url('creator/shop') }}" class="nav-link {{ Request::is('creator/shop') ? 'active' : '' }}">
@@ -73,7 +101,7 @@
               Shop
             </p>
           </a>
-          
+
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -87,7 +115,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url('creator/personal-information/'.Auth::user()->id) }}" class="nav-link" >
+              <a href="{{ url('creator/personal-information/'.Auth::user()->id) }}" class="nav-link">
                 <i class="far fa-circle nav-icon text-white"></i>
                 <p class="text-white">Personal Information</p>
               </a>

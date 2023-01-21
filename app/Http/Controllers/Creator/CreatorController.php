@@ -10,23 +10,26 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\Creator;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 class CreatorController extends Controller
 {
     public function __construct()
-{
-    $this->middleware(['auth','verified']);
-}
+    {
+        $this->middleware(['auth', 'verified']);
+    }
 
     public function index()
     {
+
         return redirect()->intended('creator/dashboard');
     }
     public function dashboard()
     {
-        return view('creator.dashboard');
+        $products = Product::all();
+        return view('creator.dashboard', compact('products'));
     }
     public function personal_information(Request $request, $id = null)
     {
@@ -58,7 +61,7 @@ class CreatorController extends Controller
                     'phone_number' => $request->phone_number
                 ]);
             }
-            session()->flash('success','profile updated successfully');
+            session()->flash('success', 'profile updated successfully');
             return redirect('creator/dashboard');
         }
         $title = 'edit profile';
@@ -77,19 +80,18 @@ class CreatorController extends Controller
         if ($request->isMethod('post')) {
             $user = User::find($id);
 
-            if (Hash::check($request->current_password,$user->password)) {
-            $request->validate([
-                'current_password' =>['required'],
-                'password' => ['required','confirmed', Rules\Password::defaults()],
-            ]);
-                
+            if (Hash::check($request->current_password, $user->password)) {
+                $request->validate([
+                    'current_password' => ['required'],
+                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                ]);
+
                 $user->password = Hash::make($request->password);
                 $user->update();
-                session()->flash('success','password updated successfully');
+                session()->flash('success', 'password updated successfully');
                 return redirect('creator');
-            }
-            else {
-                Session::flash('error','old password not correct');
+            } else {
+                Session::flash('error', 'old password not correct');
                 // session()->flash('error','old password not correct');
                 return back();
             }

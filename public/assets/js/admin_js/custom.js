@@ -26,9 +26,13 @@ $(document).ready(function () {
     $(".updateCategoryStatus").click(function () {
         var status = $(this).text();
         var cate_id = $(this).attr("cate_id");
+        var user = $(this).attr("user");
         $.ajax({
             type: "post",
-            url: "/admin/update-category-status",
+            url:
+                user == "admin"
+                    ? "/admin/update-category-status"
+                    : "/creator/update-category-status",
             data: { status: status, cate_id: cate_id },
             success: function (resp) {
                 if (resp["status"] == 0) {
@@ -49,9 +53,13 @@ $(document).ready(function () {
     $(".updateSectionStatus").click(function () {
         var status = $(this).text();
         var section_id = $(this).attr("section_id");
+        var user = $(this).attr("user");
         $.ajax({
             type: "post",
-            url: "/admin/update-section-status",
+            url:
+                user == "admin"
+                    ? "/admin/update-section-status"
+                    : "/creator/update-section-status",
             data: { status: status, section_id: section_id },
             success: function (resp) {
                 if (resp["status"] == 0) {
@@ -72,9 +80,13 @@ $(document).ready(function () {
     $(".updateProductStatus").click(function () {
         var status = $(this).text();
         var product_id = $(this).attr("product_id");
+        var user = $(this).attr("user");
         $.ajax({
             type: "post",
-            url: "/admin/update-product-status",
+            url:
+                user == "admin"
+                    ? "/admin/update-product-status"
+                    : "/creator/update-product-status",
             data: { status: status, product_id: product_id },
             success: function (resp) {
                 if (resp["status"] == 0) {
@@ -118,9 +130,13 @@ $(document).ready(function () {
     $(".updateAttributeStatus").click(function () {
         var status = $(this).text();
         var attribute_id = $(this).attr("attribute_id");
+        var user = $(this).attr("user");
         $.ajax({
             type: "post",
-            url: "/admin/update-attribute-status",
+            url:
+                user == "admin"
+                    ? "/admin/update-attribute-status"
+                    : "/creator/update-attribute-status",
             data: { status: status, attribute_id: attribute_id },
             success: function (resp) {
                 if (resp["status"] == 0) {
@@ -141,9 +157,13 @@ $(document).ready(function () {
     $(".updateImageStatus").click(function () {
         var status = $(this).text();
         var image_id = $(this).attr("image_id");
+        var user = $(this).attr("user");
         $.ajax({
             type: "post",
-            url: "/admin/update-image-status",
+            url:
+                user == "admin"
+                    ? "/admin/update-image-status"
+                    : "/creator/update-image-status",
             data: { status: status, image_id: image_id },
             success: function (resp) {
                 if (resp["status"] == 0) {
@@ -164,9 +184,13 @@ $(document).ready(function () {
     $(".updateProductFeatured").click(function () {
         var is_featured = $(this).text();
         var product_id2 = $(this).attr("product_id2");
+        var user = $(this).attr("user");
         $.ajax({
             type: "post",
-            url: "/admin/update-product-featured",
+            url:
+                user == "admin"
+                    ? "/admin/update-product-featured"
+                    : "/creator/update-product-featured",
             data: { is_featured: is_featured, product_id2: product_id2 },
             success: function (resp) {
                 if (resp["is_featured"] == 0) {
@@ -215,6 +239,7 @@ $(document).ready(function () {
     $(".confirm_delete").click(function (event) {
         var record = $(this).attr("record");
         var recordId = $(this).attr("recordId");
+        var user = $(this).attr("user");
         event.preventDefault();
         Swal.fire({
             title: "Are you sure?",
@@ -227,7 +252,9 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href =
-                    "/admin/delete-" + record + "/" + recordId;
+                    user == "admin"
+                        ? "/admin/delete-"
+                        : "/creator/delete-" + record + "/" + recordId;
             }
         });
     });

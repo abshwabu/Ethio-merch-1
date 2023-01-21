@@ -1,4 +1,4 @@
-@extends('layouts.admin.admin_layout')
+@extends('layouts.creator.creator_layout')
 @section('content')
 @section('title','Catalogues')
 @section('breadcrumb-active','Sections')
@@ -57,14 +57,14 @@
                     </a>
                   </td>
                   <td>
-                    <a href="{{ url('admin/edit_section/'.$item->id) }}" class="text-primary font-weight-bold text-xs"
+                    <a href="{{ url('creator/edit_section/'.$item->id) }}" class="text-primary font-weight-bold text-xs"
                       data-toggle="tooltip" data-original-title="Edit section">
                       <i class="fas fa-user-edit text-primary text-sm " data-bs-toggle="tooltip" data-bs-placement="top"
                         title="edit section"></i>
                     </a>
                     &nbsp;&nbsp;&nbsp;
                     <a href="javascript:void(0);" record="section" recordId="{{ $item->id }}" class="confirm_delete"
-                      user="admin">
+                      user="creator">
                       <i class="fas fa-trash text-primary text-sm" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="delete section"></i>
                     </a>

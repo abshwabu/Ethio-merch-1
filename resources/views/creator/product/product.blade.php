@@ -1,4 +1,4 @@
-@extends('layouts.admin.admin_layout')
+@extends('layouts.creator.creator_layout')
 @section('content')
 @section('title','Catalogues')
 @section('breadcrumb-active','Products')
@@ -28,7 +28,7 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Products</h3>
-            <a href="{{ url('admin/add-edit-product') }}" class="btn btn-success float-right">add product</a>
+            <a href="{{ url('creator/add-edit-product') }}" class="btn btn-success float-right">add product</a>
 
           </div>
           <!-- /.card-header -->
@@ -56,7 +56,7 @@
                   <td>{{ $item->product_code }}</td>
                   <td>{{ $item->product_color }}</td>
                   <td>
-                    <a href="{{ url('admin/add-images/'.$item->id) }}">
+                    <a href="{{ url('creator/add-images/'.$item->id) }}">
                       @if (!empty($item->product_image) && file_exists("storage/".$item->product_image))
 
                       <img src="{{ asset('storage/'. $item->product_image ) }}" alt="{{ $item->product_name }} image"
@@ -70,26 +70,26 @@
                   <td>{{ $item->section->name }}</td>
 
                   <td>
-                    <a href="javascript:void(0)" class="updateProductStatus" id="product-{{ $item->id }}" user="admin"
-                      product_id="{{ $item->id }}">
+                    <a href="javascript:void(0)" class="updateProductStatus" id="product-{{ $item->id }}"
+                      product_id="{{ $item->id }}" user="creator">
                       <span
                         class="{{ $item->status == 1 ? 'badge badge-sm bg-gradient-success' : 'badge badge-sm bg-gradient-secondary'}} ">{{
                         $item->status == 1 ? 'active' : 'inactive' }}</span>
                     </a>
                   </td>
                   <td>
-                    <a href="{{ url('admin/add-attributes/'.$item->id) }}">
+                    <a href="{{ url('creator/add-attributes/'.$item->id) }}">
                       <i class="fas fa-plus text-sm " data-bs-toggle="tooltip" data-bs-placement="top"
                         title="add product attribute"></i>
                     </a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="{{ url('admin/add-edit-product/'.$item->id) }}">
+                    <a href="{{ url('creator/add-edit-product/'.$item->id) }}">
                       <i class="fas fa-edit text-sm " data-bs-toggle="tooltip" data-bs-placement="top"
                         title="edit product"></i>
                     </a>
                     &nbsp;&nbsp;&nbsp;
                     <a href="javascript:void(0);" record="product" recordId="{{ $item->id }}" class="confirm_delete"
-                      user="admin">
+                      user="creator">
                       <i class="fas fa-trash text-primary text-sm" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="delete product"></i>
                     </a>

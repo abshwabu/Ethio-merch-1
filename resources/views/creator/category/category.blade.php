@@ -1,4 +1,4 @@
-@extends('layouts.admin.admin_layout')
+@extends('layouts.creator.creator_layout')
 @section('content')
 @section('title','Catalogues')
 @section('breadcrumb-active','Categories')
@@ -28,7 +28,7 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Categories</h3>
-            <a href="{{ url('admin/add-edit-category') }}" class="btn btn-success float-right">add category</a>
+            <a href="{{ url('creator/add-edit-category') }}" class="btn btn-success float-right">add category</a>
 
           </div>
           <!-- /.card-header -->
@@ -68,7 +68,7 @@
                     </a>
                   </td>
                   <td>
-                    <a href="{{ url('admin/add-edit-category/'.$item->id) }}"
+                    <a href="{{ url('creator/add-edit-category/'.$item->id) }}"
                       class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
                       data-original-title="Edit category">
                       <i class="fas fa-edit text-primary text-sm " data-bs-toggle="tooltip" data-bs-placement="top"
@@ -76,7 +76,7 @@
                     </a>
                     &nbsp;&nbsp;&nbsp;
                     <a href="javascript:void(0);" record="category" recordId="{{ $item->id }}" class="confirm_delete"
-                      user="admin">
+                      user="creator">
                       <i class="fas fa-trash text-primary text-sm" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="delete category"></i>
                     </a>

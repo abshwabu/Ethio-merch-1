@@ -3,9 +3,11 @@
 use App\Http\Controllers\Creator\CreatorController;
 use App\Http\Controllers\Creator\PaymentController;
 use App\Http\Controllers\Creator\StatisticsController;
-use App\Http\Controllers\Creator\ProductController;
 use App\Http\Controllers\Creator\ShopController;
 use App\Http\Controllers\Creator\TemplateController;
+use App\Http\Controllers\Creator\SectionController;
+use App\Http\Controllers\Creator\CategoryController;
+use App\Http\Controllers\Creator\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +27,34 @@ Route::middleware(['verified', 'auth', 'creator'])->prefix('/creator')->group(fu
     Route::post('update-avatar/{id}', [CreatorController::class, 'update_avatar']);
     Route::match(['get', 'post'], 'personal-information/{id?}', [CreatorController::class, 'personal_information']);
     Route::match(['get', 'post'], 'account-setting/{id?}', [CreatorController::class, 'account_setting']);
-
+    //section
+    Route::get('section', [SectionController::class, 'section']);
+    Route::get('edit_section/{id}', [SectionController::class, 'edit_section']);
+    Route::post('/section_update/{id}', [SectionController::class, 'update_section']);
+    Route::get('delete-section/{id}', [SectionController::class, 'delete_section']);
+    Route::post('update-section-status', [SectionController::class, 'update_status']);
+    //category
+    Route::get('categories', [CategoryController::class, 'category']);
+    Route::match(['get', 'post'], 'add-edit-category/{id?}', [CategoryController::class, 'addEditCategory']);
+    Route::get('/delete-category/{id}', [CategoryController::class, 'delete_category']);
+    Route::post('update-category-status', [CategoryController::class, 'update_status']);
+    Route::post('append-categories-level', [CategoryController::class, 'append_categories_level']);
+    //product
+    Route::get('products', [ProductController::class, 'product']);
+    Route::get('delete-product/{id}', [ProductController::class, 'delete_product']);
+    Route::post('update-product-status', [ProductController::class, 'update_status']);
+    Route::post('update-product-is_featured', [ProductController::class, 'update_is_is_featured']);
+    Route::post('delete-product-image/{id}', [ProductController::class, 'delete_product_image']);
+    Route::match(['get', 'post'], 'add-edit-product/{id?}', [ProductController::class, 'addEditProduct']);
+    //Attributes
+    Route::match(['get', 'post'], 'add-attributes/{id?}', [ProductController::class, 'addAttributes']);
+    Route::post('edit-attributes/{id}', [ProductController::class, 'editAttributes']);
+    Route::post('update-attribute-status', [ProductController::class, 'update_attribute_status']);
+    Route::get('delete-attribute/{id}', [ProductController::class, 'delete_attribute']);
+    //images
+    Route::match(['get', 'post'], 'add-images/{id?}', [ProductController::class, 'addImages']);
+    Route::post('update-image-status', [ProductController::class, 'update_image_status']);
+    Route::get('delete-image/{id}', [ProductController::class, 'delete_image']);
     //payment-data
     Route::get('payment-data', [PaymentController::class, 'payment_data']);
     Route::post('add-edit-payment-data/{id}', [PaymentController::class, 'add_edit_payment']);
