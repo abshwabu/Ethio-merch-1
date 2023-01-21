@@ -12,7 +12,7 @@ class TemplateController extends Controller
 {
     public function template()
     {
-        $templates = Template::where('status', 0)->get();
+        $templates = Template::all();
         return view('admin.template.template', compact('templates'));
     }
     public function addEditTemplate(Request $request, $id = null)
@@ -35,7 +35,7 @@ class TemplateController extends Controller
             if ($id == null) {
                 $rules = [
                     'name' => ['required', 'unique:templates'],
-                    'image' => ['image'],
+                    'image' => ['required', 'image'],
                 ];
             } else {
                 $rules = [
@@ -83,5 +83,16 @@ class TemplateController extends Controller
             Template::where('id', $data['template_id'])->update(['status' => $status]);
             return response()->json(['status' => $status, 'template_id' => $data['template_id']]);
         }
+    }
+    public function delete_template($id)
+    {
+        $template = Template::where('id', $id)->first();
+        if (file_exists('storage/' . $template->template_image)) {
+            File::delete('storage/' . $template->template_image);
+        }
+
+        $template->delete();
+        Session::flash('success', 'template deleted');
+        return redirect()->back();
     }
 }

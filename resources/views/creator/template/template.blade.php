@@ -27,23 +27,37 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach ($template as $item)
+
+                            @if (!empty($item->image) &&
+                            file_exists("storage/".$item->image))
 
 
-                    <div class="card-body d-flex">
-                        
-                     
+                            <div class="col-md-4 col-sm-6" id="wrap">
 
-                        @foreach ($product as $item)
-                        
-                        <div class="col-md-4">
-                            <img src="{{ asset('storage/'. $item->product_image ) }}" alt="" height="300px">
-                           <p><a href="{{ asset('storage/'. $item->product_image ) }}" download="{{$item->product_name}}"><i class="fa fa-download"></i></a></p>
+
+                                <img src="{{ asset('storage/'. $item->image ) }}" alt="{{ $item->name }} image"
+                                    style="height: 200px; ">
+                                <p>{{ $item->name }}</p>
+
+
+                                <a href="{{ asset('storage/'. $item->image ) }}" download="{{$item->name}}"
+                                    class="btn-slide2">
+                                    <span class="circle2"><i class="fa fa-download"></i></span>
+                                    <span class="title2">Download</span>
+                                    <span class="title-hover2">Click here</span>
+                                </a>
+
+
+                            </div>
+                            @else
+                            <img src="{{ asset('storage/products/No_Image.png')}}" alt="no_image" style="width: 100px">
+                            @endif
+                            @endforeach
                         </div>
-                        @endforeach
-                       
                     </div>
-                    
-                    </form>
                 </div>
             </div>
         </div>

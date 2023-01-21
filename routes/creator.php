@@ -5,6 +5,7 @@ use App\Http\Controllers\Creator\PaymentController;
 use App\Http\Controllers\Creator\StatisticsController;
 use App\Http\Controllers\Creator\ProductController;
 use App\Http\Controllers\Creator\ShopController;
+use App\Http\Controllers\Creator\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,22 +19,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['verified','auth','creator'])->prefix('/creator')->group(function(){
-Route::get('',[CreatorController::class,'index']);
-Route::get('dashboard',[CreatorController::class,'dashboard']);
-Route::post('update-avatar/{id}',[CreatorController::class,'update_avatar']);
-Route::match(['get','post'], 'personal-information/{id?}',[CreatorController::class,'personal_information']);
-Route::match(['get','post'], 'account-setting/{id?}',[CreatorController::class,'account_setting']);
+Route::middleware(['verified', 'auth', 'creator'])->prefix('/creator')->group(function () {
+    Route::get('', [CreatorController::class, 'index']);
+    Route::get('dashboard', [CreatorController::class, 'dashboard']);
+    Route::post('update-avatar/{id}', [CreatorController::class, 'update_avatar']);
+    Route::match(['get', 'post'], 'personal-information/{id?}', [CreatorController::class, 'personal_information']);
+    Route::match(['get', 'post'], 'account-setting/{id?}', [CreatorController::class, 'account_setting']);
 
-//payment-data
-Route::get('payment-data',[PaymentController::class,'payment_data']);
-Route::post('add-edit-payment-data/{id}',[PaymentController::class,'add_edit_payment']);
-//statistics
-Route::get('statistics',[StatisticsController::class,'index']);
-//Designs
-Route::get('templates',[ProductController::class,'index']);
-//shop
-Route::get('shop',[ShopController::class,'index']);
-
-
+    //payment-data
+    Route::get('payment-data', [PaymentController::class, 'payment_data']);
+    Route::post('add-edit-payment-data/{id}', [PaymentController::class, 'add_edit_payment']);
+    //statistics
+    Route::get('statistics', [StatisticsController::class, 'index']);
+    //Designs
+    Route::get('templates', [TemplateController::class, 'index']);
+    //shop
+    Route::get('shop', [ShopController::class, 'index']);
 });

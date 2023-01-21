@@ -52,6 +52,7 @@ Route::middleware(['admin', 'verified', 'auth'])->prefix('/admin')->group(functi
     //template
     Route::get('template', [TemplateController::class, 'template'])->name('template');
     Route::post('update-template-status', [TemplateController::class, 'update_status']);
+    Route::get('delete-template/{id}', [TemplateController::class, 'delete_template']);
     Route::match(['get', 'post'], 'add-edit-template/{id?}', [TemplateController::class, 'addEditTemplate']);
     //product
     Route::get('products', [ProductController::class, 'product'])->name('product');
