@@ -99,6 +99,12 @@
                 <p>Products</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('template') }}" class="nav-link {{ Request::is('admin/templates') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Templates</p>
+              </a>
+            </li>
             
           </ul>
         </li>

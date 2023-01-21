@@ -15,13 +15,16 @@ class Product extends Model
     {
        return $this->belongsTo(Catagory::class,'category_id');
     }
-    public function section(){
+    public function section()
+    {
         return $this->belongsTo(Section::class,'section_id');
     }
-    public function attributes(){
+    public function attributes()
+    {
         return $this->hasMany(ProductAttributes::class);
     }
-    public function images(){
+    public function images()
+    {
         return $this->hasMany(ProductImages::class);
     }
 }

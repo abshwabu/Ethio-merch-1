@@ -36,7 +36,7 @@
 	<header id="header" class="header header-style-1">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="topbar-menu-area">
+				<!-- <div class="topbar-menu-area">
 					<div class="container">
 						<div class="topbar-menu left-menu">
 							<ul>
@@ -82,7 +82,7 @@
 							</ul>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="container">
 					<div class="mid-section main-info-area">
@@ -96,7 +96,43 @@
 						<div class="wrap-icon right-section">
 							@livewire('wishlist-count-component')
 							@livewire('cart-count-component')
-							
+							<ul>
+								
+								
+								@if(Route::has('login'))
+								@auth
+								 
+									<li class="menu-item menu-item-has-children parent" >
+										<a title="My Account" href="#">My Account({{Auth::user()->name}})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+										<ul class="submenu curency" >
+											<li class="menu-item" >
+												<a title="dashboard" href="{{route('user.dashboard')}}">Dashboard</a>
+											</li>
+											<li class="menu-item">
+													<a href="{{route('logout')}}" onClick ="event.preventDefault(); document.getElementById('logout-form').submit()" >Logout</a>
+											    </li>
+											<form id="logout-form" method="POST" action="{{route('logout')}}" >
+												@csrf
+												
+											</form>
+											
+											
+										</ul>
+									</li>
+								
+
+								@else
+								 	{{-- <li class="menu-item" ><a title="Register or Login" href="{{url('user/login')}}">Login</a></li> --}}
+									 <div class="wrap-icon-section">
+									 <a title="Register or Login" class="btn btn-success bg-success" href="{{url('creator/register')}}"><span class="my-3">Create shop</span></a>
+									</div>
+									<!-- <li class="menu-item" ><a title="Register or Login" class="btn btn-success bg-success" href="{{url('creator/register')}}"><span class="my-3">Create shop</span></a></li> -->
+								@endif
+
+
+
+								@endif
+							</ul>
 							<div class="wrap-icon-section show-up-after-1024">
 								<a href="#" class="mobile-navigation">
 									<span></span>

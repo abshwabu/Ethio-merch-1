@@ -11,7 +11,7 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::where(['status'=>1,'stok_status'=>'instock'])->get();
-        $title = 'Products';
-        return view('creator.product.product',compact('title','product'));
+        $title = 'Templates';
+        return view('creator.template.template',compact('title','product'));
     }
 }

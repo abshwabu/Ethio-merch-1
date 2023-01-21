@@ -31,7 +31,7 @@ Route::post('add-edit-payment-data/{id}',[PaymentController::class,'add_edit_pay
 //statistics
 Route::get('statistics',[StatisticsController::class,'index']);
 //Designs
-Route::get('products',[ProductController::class,'index']);
+Route::get('templates',[ProductController::class,'index']);
 //shop
 Route::get('shop',[ShopController::class,'index']);
 

@@ -47,10 +47,10 @@
 
         </li>
         <li class="nav-item">
-          <a href="{{ url('creator/products') }}" class="nav-link {{ Request::is('creator/products') ? 'active' : '' }}">
+          <a href="{{ url('creator/templates') }}" class="nav-link {{ Request::is('creator/templates') ? 'active' : '' }}">
             <i class="nav-icon text-white fas fa-tshirt"></i>
             <p class="text-white">
-              Products
+              Templates
               
             </p>
           </a>
