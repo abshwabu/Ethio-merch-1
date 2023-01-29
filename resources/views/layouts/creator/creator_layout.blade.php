@@ -41,6 +41,9 @@
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">
   {{-- js files --}}
   <script src="{{asset('assets/js/admin_js/jquery/jquery-3.6.0.min.js')}}"></script>
+  {{-- fabric js --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.6/fabric.min.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

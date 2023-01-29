@@ -291,3 +291,84 @@ $(function () {
         theme: "bootstrap4",
     });
 });
+// Initialize the t-shirt designer
+var canvas = new fabric.Canvas("tshirt-canvas");
+
+// Add event listener for the file uploader
+document
+    .getElementById("logo-uploader")
+    .addEventListener("change", function (e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function (f) {
+            var data = f.target.result;
+            fabric.Image.fromURL(data, function (img) {
+                img.set({
+                    left: 0,
+                    top: 0,
+                    angle: 0,
+                    padding: 10,
+                    cornersize: 10,
+                });
+                canvas.add(img).renderAll();
+                canvas.setActiveObject(img);
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+// Add event listener for the "Add Text" button
+document
+    .getElementById("add-text-button")
+    .addEventListener("click", function () {
+        // Get the input text
+        var text = document.getElementById("text-input").value;
+
+        // Create a new fabric.js text object
+        var textbox = new fabric.IText(text, {
+            left: 100,
+            top: 100,
+            fontFamily: "Arial",
+            fill: "#000000",
+            fontSize: 30,
+        });
+
+        // Add the text object to the canvas
+        canvas.add(textbox);
+    });
+
+// // Initialize the t-shirt designer
+// var canvas = new fabric.Canvas("tshirt-canvas");
+
+// // Add event listeners for the file uploader and add text button
+// document.getElementById("logo-form").addEventListener("submit", uploadLogo);
+// document.getElementById("add-text-button").addEventListener("click", addText);
+
+// function uploadLogo(e) {
+//     e.preventDefault();
+//     let file = e.target.files[0];
+//     let reader = new FileReader();
+//     reader.onload = (event) => {
+//         let img = new Image();
+//         img.src = event.target.result;
+//         img.onload = () => {
+//             let imgInstance = new fabric.Image(img, {
+//                 width: img.width,
+//                 height: img.height,
+//             });
+//             canvas.add(imgInstance);
+//         };
+//     };
+//     reader.readAsDataURL(file);
+// }
+
+// function addText() {
+//     let text = document.getElementById("text-input").value;
+//     let textbox = new fabric.IText(text, {
+//         left: 100,
+//         top: 100,
+//         fontFamily: "Arial",
+//         fill: "black",
+//         fontSize: 20,
+//     });
+//     canvas.add(textbox);
+// }

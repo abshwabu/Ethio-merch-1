@@ -57,6 +57,26 @@
                             @endif
                             @endforeach
                         </div>
+                        {{-- <div class="row">
+                            <div class="col-12">
+                                <div id="tshirt-designer">
+                                    <canvas id="tshirt-canvas"> --}}
+                                        {{-- <img src="{{ asset('assets/images/admin_imgs/t-shirtLogo.png') }}" alt="">
+                                        --}}
+
+                                        {{-- </canvas>
+                                    <div id="tshirt-controls">
+                                        <form id="logo-form" action="upload.php" method="post"
+                                            enctype="multipart/form-data">
+                                            <input type="file" id="logo-uploader" name="logo">
+                                            <input type="submit" value="Upload Logo">
+                                        </form>
+                                        <button id="add-text-button">Add Text</button>
+                                        <input type="text" id="text-input" placeholder="Enter text here">
+                                    </div>
+                                </div>
+                            </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

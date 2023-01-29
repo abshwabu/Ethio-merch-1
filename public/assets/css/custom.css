@@ -153,3 +153,24 @@
 .btn-slide span.title-hover, .btn-slide2 span.title-hover2 {
     color: #fff;
 }
+#tshirt-designer {
+  width: 100%;
+  height: 600px;
+  margin: 0;
+}
+
+#tshirt-canvas {
+  width: 100px;
+  height: 80%;
+  background-color: white;
+  border: 1px solid black;
+}
+
+#tshirt-controls {
+  width: 100%;
+  height: 20%;
+  background-color: gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
