@@ -5,7 +5,6 @@ use App\Http\Controllers\Creator\PaymentController;
 use App\Http\Controllers\Creator\StatisticsController;
 use App\Http\Controllers\Creator\ShopController;
 use App\Http\Controllers\Creator\TemplateController;
-use App\Http\Controllers\Creator\SectionController;
 use App\Http\Controllers\Creator\CategoryController;
 use App\Http\Controllers\Creator\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -27,12 +26,7 @@ Route::middleware(['verified', 'auth', 'creator'])->prefix('/creator')->group(fu
     Route::post('update-avatar/{id}', [CreatorController::class, 'update_avatar']);
     Route::match(['get', 'post'], 'personal-information/{id?}', [CreatorController::class, 'personal_information']);
     Route::match(['get', 'post'], 'account-setting/{id?}', [CreatorController::class, 'account_setting']);
-    //section
-    Route::get('section', [SectionController::class, 'section']);
-    Route::get('edit_section/{id}', [SectionController::class, 'edit_section']);
-    Route::post('/section_update/{id}', [SectionController::class, 'update_section']);
-    Route::get('delete-section/{id}', [SectionController::class, 'delete_section']);
-    Route::post('update-section-status', [SectionController::class, 'update_status']);
+
     //category
     Route::get('categories', [CategoryController::class, 'category']);
     Route::match(['get', 'post'], 'add-edit-category/{id?}', [CategoryController::class, 'addEditCategory']);

@@ -60,13 +60,6 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ url('creator/section') }}"
-                class="nav-link {{ Request::is('creator/section') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon text-white"></i>
-                <p class="text-white">Sections</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="{{ url('creator/categories') }}"
                 class="nav-link {{ Request::is('creator/categories') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon text-white"></i>
